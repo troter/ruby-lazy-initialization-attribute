@@ -1,0 +1,24 @@
+= Lazy Initialization Attribute
+
+== Example
+
+  require 'lazyinitializationattribute'
+  class Foo
+    include LazyInitializationAttribute
+    attr_accessor :foo
+    lazy_attr_accessor :bar do @foo end
+    lazy_attr_reader :time do Time.now end
+    def initialize()
+      @foo = 0
+    end
+  end
+
+  foo = Foo.new
+  foo.foo = 10
+  foo.bar     # => 10
+  foo.bar = 1 # => 1
+  foo.bar     # => 1
+  foo.time    # => Wed Apr 22 19:58:21 +0900 2009
+  foo.time    # => Wed Apr 22 19:58:21 +0900 2009
+
+
